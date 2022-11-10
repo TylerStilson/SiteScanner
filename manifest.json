@@ -1,0 +1,25 @@
+
+{
+    "name": "Site Scanner",
+    "version": "0.0.1",
+    "manifest_version": 2,
+    "browser_action": {
+        "default_popup": "extention.html",
+        "default_icon": "logo.svg"
+    },
+    "icons": {
+        "128": "logo.svg"
+    },
+    "permissions": ["tabs", "<all_urls>"],
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "js": ["content.js"],
+            "run_at": "document_end"
+        }
+    ]
+
+}

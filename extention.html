@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Site Scanner</title>
+    <link rel="stylesheet" href="https://use.typekit.net/hbn7uzi.css">
+</head>
+<body>
+    <div id="homescreen">
+        <h1>Site Scanner</h1>
+        <h2>Check My</h2>
+        
+        <div class="button-flex" id="link-button">
+            <button class="mainButton">Links</button>
+            <div class="info-icon-cont" id="link-span">
+                <span class="info-icon">&#8505;</span>
+            </div>
+            <div id="link-info">
+                <p>Make sure you dont have any broken links</p>
+            </div>
+        </div>
+
+        <div class="button-flex" id="image-button">
+            <button class="mainButton">Images</button>
+            <div class="info-icon-cont" id="image-span">
+                <span class="info-icon">&#8505;</span>
+            </div>
+            <div id="image-info">
+                <p>Make sure you have all your image alt 
+                    attributes for accessibility</p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div id="loading">
+        <h1>Loading...</h1>
+        <div id="message"></div>
+    </div>
+
+    <script src="content.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
