@@ -88,3 +88,22 @@ h2{
     align-items: center;
     justify-content: center;
 }
+
+#linkSuccess {
+    display: none;
+}
+#linkError{
+    display:none;
+}
+.lightGrey{
+    font-family: 'lato', 'sans-serif';
+    font-weight: 700;
+    font-size: 32px;
+    color: #5F5D5D;
+}
+.greenText{
+    font-family: 'lato', 'sans-serif';
+    font-weight: 500;
+    font-size: 26px;
+    color: #63E790;
+}

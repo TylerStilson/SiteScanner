@@ -10,7 +10,7 @@
     "icons": {
         "128": "logo.svg"
     },
-    "permissions": ["tabs", "<all_urls>"],
+    "permissions": ["tabs", "<all_urls>", "nativeMessaging"],
     "content_scripts": [
         {
             "matches": [

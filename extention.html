@@ -38,12 +38,23 @@
 
 
     <div id="loading">
-        <h1>Loading...</h1>
-        <div id="message"></div>
+        <h1 id="loadingMessage">Loading...</h1>
+        <div id="linkSuccess">
+            <h1>Site Scanner</h1>
+            <h2 class="lightGrey">Links</h2>
+            <h3 class="greenText">All your links are working</h3>
+        </div>
+        <div id="linkError">
+            <h1>Site Scanner</h1>
+            <h2>List of Broken Links:</h2>
+            <div id="insertBlinks">
+
+            </div>
+        </div>
     </div>
 
-    <script src="content.js"></script>
-    <script src="script.js"></script>
+    <script src="content.js" type="module"></script>
+    <script src="script.js" type="module"></script>
 
 </body>
 </html>
