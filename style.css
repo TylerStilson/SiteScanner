@@ -107,3 +107,39 @@ h2{
     font-size: 26px;
     color: #63E790;
 }
+.redText{
+    font-family: 'lato', 'sans-serif';
+    font-weight: 500;
+    font-size: 26px;
+    color: #EB6565;
+}
+#arrow-position{
+    color: #231F20;
+    position: absolute;
+    top: 26px;
+    left: 20px;
+}
+#arrow-position2{
+    color: #231F20;
+    position: absolute;
+    top: 26px;
+    left: 20px;
+}
+#arrow-position3{
+    color: #231F20;
+    position: absolute;
+    top: 26px;
+    left: 20px;
+}
+#arrow-position4{
+    color: #231F20;
+    position: absolute;
+    top: 26px;
+    left: 20px;
+}
+#imageSuccess{
+    display: none;
+}
+#imageError{
+    display: none;
+}

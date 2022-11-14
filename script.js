@@ -23,9 +23,14 @@ const loadingMessage = document.getElementById('loadingMessage');
 const linkSuccess = document.getElementById('linkSuccess');
 const linkError = document.getElementById('linkError');
 const Blinks = document.getElementById('insertBlinks');
+const imageSuccess = document.getElementById('imageSuccess');
+const imageError = document.getElementById('imageError');
 
+
+var ImgList = [];
 var LinkList = [];
 var BrokenLinks = [];
+var missingAltList = [];
 
 // const fullLinkList = document.body.getElementsByTagName("a");
 
@@ -39,14 +44,34 @@ var BrokenLinks = [];
 
 document.querySelector('#link-button').onclick = function () {
     linkFunction();
-    
-    
+
 }
 
 document.querySelector('#image-button').onclick = function (){
     imageFunction();
 }
 
+document.querySelector('#arrow-position').onclick = function(){
+    goBack();
+}
+document.querySelector('#arrow-position2').onclick = function(){
+    goBack();
+}
+document.querySelector('#arrow-position3').onclick = function(){
+    goBack();
+}
+document.querySelector('#arrow-position4').onclick = function(){
+    goBack();
+}
+
+function goBack(){
+    homepage.style.display = "block";
+    loadingPage.style.display = "none";
+    linkSuccess.style.display = "none";
+    linkError.style.display = "none";
+    imageError.style.display = "none";
+    imageSuccess.style.display = "none";
+}
 
 
 async function linkFunction(){
@@ -59,12 +84,12 @@ async function linkFunction(){
         var status = await makeRequest(LinkList[i].link);
     }
     if (status != '200'){
-        console.log("status is: ", status);
+        //console.log("status is: ", status);
         BrokenLinks.push(LinkList[i]);
     }
   }
-  console.log("broken links: ", BrokenLinks);
-  console.log("B list length: ", BrokenLinks.length);
+  //console.log("broken links: ", BrokenLinks);
+  //console.log("B list length: ", BrokenLinks.length);
 
   if (BrokenLinks.length == 0){
     console.log("link scanner success. found no broken links");
@@ -80,6 +105,16 @@ async function linkFunction(){
     loadingMessage.style.display = "none";
     linkError.style.display = "block";
     loadingPage.style.alignItems = "flex-start";
+
+    // chrome.tabs.sendMessage(tabs[0].id, {greeting: "show broken links"}).then((response)=>{
+    //     console.log(response);
+    // });
+
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {greeting: "show broken links"}, function(response) {
+            console.log("response from the highlight call: ",response);
+        });
+    });
     
   }
 
@@ -125,6 +160,33 @@ function imageFunction(){
     homepage.style.display = "none";
     loadingPage.style.display = "flex";
     // make the list of images here
+    for (let image in ImgList){
+        console.log("in content indiv: ", ImgList[image]);
+        if ( ImgList[image] == {} | ImgList[image].src == ''){
+            console.log("dont count these");
+        }
+        else{
+            if (ImgList[image].alt == ""){
+                missingAltList.push(ImgList[image]);
+            }
+        }
+
+        
+    }
+
+    if (missingAltList.length > 0){
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, {greeting: "show empty alts"}, function(response) {
+                console.log("resp from image call from content: ", response);
+            });
+        });
+        loadingMessage.style.display = "none";
+        imageError.style.display = 'block';
+    }
+    else{
+        loadingMessage.style.display = "none";
+        imageSuccess.style.display = "block";
+    }
 
 }
 
@@ -132,7 +194,13 @@ var Links = [];
 chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello"}, function(response) {
         console.log("tabs res: ", response);
-        LinkList = response;
+        // console.log("tabs resp link: ", response.links);
+        // console.log("tabs resp images: ", response.images);
+        LinkList = response.links;
+        ImgList = response.images;
+        // console.log("tabs resp linklist var: ", LinkList);
+        // console.log("tabs resp imglist var: ", ImgList);
+
     });
 });
 // chrome.runtime.sendMessage('get-links', (response) => {
