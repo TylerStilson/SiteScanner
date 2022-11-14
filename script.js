@@ -32,37 +32,15 @@ var LinkList = [];
 var BrokenLinks = [];
 var missingAltList = [];
 
-// const fullLinkList = document.body.getElementsByTagName("a");
-
-// var pageHTML = null;
-// var pel = false;
-// var firstA = false
-// var isATag = false;
-
-// var listOfLinks = [];
-// var tempLink = "";
-
-document.querySelector('#link-button').onclick = function () {
+document.querySelector('#link-button .mainButton').onclick = function () {
     linkFunction();
-
 }
-
-document.querySelector('#image-button').onclick = function (){
+document.querySelector('#image-button .mainButton').onclick = function () {
     imageFunction();
 }
-
-document.querySelector('#arrow-position').onclick = function(){
-    goBack();
-}
-document.querySelector('#arrow-position2').onclick = function(){
-    goBack();
-}
-document.querySelector('#arrow-position3').onclick = function(){
-    goBack();
-}
-document.querySelector('#arrow-position4').onclick = function(){
-    goBack();
-}
+document.querySelectorAll('.back-arrow').forEach(function(arrow) {
+    arrow.onclick = goBack;
+});
 
 function goBack(){
     homepage.style.display = "block";
