@@ -1,88 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+:root {
+    --white: #fff;
+    --black: #242424;
+    --gray: #5f5d5d;
+    --lt-gray: #dfdfdf;
+    --green: #63E790;
+    --red: #EB6565;
+}
+* {
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 body {
     width: 430px;
     height: 330px;
-    background-color: #FFFFFF;
+    padding: 24px;
+    background-color: var(--white);
     display: flex;
     flex-direction: column;
-    border-radius: 26px;
-    box-shadow: 2px 8px 20px 3px rgba(0, 0, 0, 0.5);
-    margin: 0px;
     align-items: center;
 }
-h1{
-    font-family: 'lato', 'sans-serif';
+h1 {
     font-weight: 700;
     font-size: 36px;
     line-height: 43px;
     text-align: center;
-    color: #000000;
+    color: var(--black);
     margin-bottom: 30px;
 }
-h2{
-    font-family: 'lato', 'sans-serif';
+h2 {
     font-weight: 700;
-    font-size: 32px;
+    font-size: 28px;
     line-height: 38px;
     text-align: center;
-    color: #5f5d5d;
-    margin-top: 0px;
+    color: var(--gray);
 }
-.mainButton{
-    background-color: #63E790;
-    color: #ffffff;
-    font-family: 'lato', 'sans-serif';
+.mainButton {
+    background-color: var(--green);
+    color: var(--white);
     font-weight: 700;
     font-size: 26px;
     text-align: center;
     width: 200px;
     border: none;
-    margin-bottom: 20px;
+    height: 40px;
+    position: relative;
 }
-.button-flex{
+.mainButton:after {
+    position: absolute;
+    top: 15%;
+    right: 0;
+    width: 1px;
+    height: 70%;
+    content: "";
+    background-color: var(--white);
+}
+.button-flex {
     display: flex;
+    height: 40px;
+    margin: 20px 0;
+    position: relative;
 }
-.info-icon-cont{
-    background-color: #63E790;
-    height: 39px;
-    width: 25px;
-}
-.info-icon{
-    background-color: #63E790;
-    color: #ffffff;
+.info-icon-cont {
+    background-color: var(--green);
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    color: var(--white);
     font-size: 26px;
 }
-#image-info{
+.additional-info {
     display: none;
     position: absolute;
-    top: 158px;
-    background-color: #D9D9D9;
-    width: 225px;
-    top: 165px;
-    font-family: 'lato';
+    background-color: var(--lt-gray);
+    max-width: 225px;
+    top: -45px;
+    right: 6px;
+    padding: 6px;
+    user-select: none;
 }
-#link-info{
-    display: none;
+.info-icon-cont:hover + .additional-info,  
+.info-icon-cont span:hover + .additional-info,
+.additional-info:hover {
+    display: block;
+}
+.back-arrow {
+    width: 40px;
+    height: 40px;
+    background: url('./assets/arrow.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: var(--black);
     position: absolute;
-    top: 250px;
-    background-color: #D9D9D9;
-    width: 225px;
-    top: 118px;
-    font-family: 'lato';
+    top: 26px;
+    left: 20px;
+    cursor: pointer;
 }
 
-/* #link-span:hover{
-    background-color: pink;
-} */
-
-#link-span:hover ~ #link-info{
-    display: block;
-}
-
-#image-span:hover ~ #image-info{
-    display: block;
-}
-
-#loading{
+#loading {
     display: none;
     height: 100%;
     align-items: center;
@@ -92,54 +115,27 @@ h2{
 #linkSuccess {
     display: none;
 }
-#linkError{
+#linkError {
     display:none;
 }
-.lightGrey{
-    font-family: 'lato', 'sans-serif';
+.lightGrey {
     font-weight: 700;
     font-size: 32px;
-    color: #5F5D5D;
+    color: var(--gray);
 }
-.greenText{
-    font-family: 'lato', 'sans-serif';
+.greenText {
     font-weight: 500;
     font-size: 26px;
-    color: #63E790;
+    color: var(--green);
 }
-.redText{
-    font-family: 'lato', 'sans-serif';
+.redText {
     font-weight: 500;
     font-size: 26px;
-    color: #EB6565;
+    color: var(--red);
 }
-#arrow-position{
-    color: #231F20;
-    position: absolute;
-    top: 26px;
-    left: 20px;
-}
-#arrow-position2{
-    color: #231F20;
-    position: absolute;
-    top: 26px;
-    left: 20px;
-}
-#arrow-position3{
-    color: #231F20;
-    position: absolute;
-    top: 26px;
-    left: 20px;
-}
-#arrow-position4{
-    color: #231F20;
-    position: absolute;
-    top: 26px;
-    left: 20px;
-}
-#imageSuccess{
+#imageSuccess {
     display: none;
 }
-#imageError{
+#imageError {
     display: none;
 }

@@ -15,22 +15,21 @@
         
         <div class="button-flex" id="link-button">
             <button class="mainButton">Links</button>
-            <div class="info-icon-cont" id="link-span">
-                <span class="info-icon">&#8505;</span>
+            <div class="info-icon-cont">
+                <span>&#8505;</span>
             </div>
-            <div id="link-info">
+            <div class="additional-info">
                 <p>Make sure you dont have any broken links</p>
             </div>
         </div>
 
         <div class="button-flex" id="image-button">
             <button class="mainButton">Images</button>
-            <div class="info-icon-cont" id="image-span">
-                <span class="info-icon">&#8505;</span>
+            <div class="info-icon-cont">
+                <span>&#8505;</span>
             </div>
-            <div id="image-info">
-                <p>Make sure you have all your image alt 
-                    attributes for accessibility</p>
+            <div class="additional-info">
+                <p>Make sure you have all your image alt attributes for accessibility</p>
             </div>
         </div>
 
@@ -39,30 +38,27 @@
 
     <div id="loading">
         <h1 id="loadingMessage">Loading...</h1>
-
         <div id="linkSuccess">
-            <img src="./assets/arrow.svg" alt="" id="arrow-position">
+            <div class="back-arrow"></div>
             <h1>Site Scanner</h1>
             <h2 class="lightGrey">Links</h2>
             <h3 class="greenText">All your links are working</h3>
         </div>
         <div id="linkError">
-            <img src="./assets/arrow.svg" alt="" id="arrow-position2">
+            <div class="back-arrow"></div>
             <h1>Site Scanner</h1>
             <h2>List of Broken Links:</h2>
-            <div id="insertBlinks">
-
-            </div>
+            <div id="insertBlinks"></div>
         </div>
 
         <div id="imageSuccess">
-            <img src="./assets/arrow.svg" alt="" id="arrow-position3">
+            <div class="back-arrow"></div>
             <h1>Site Scanner</h1>
             <h2 class="lightGrey">Images</h2>
             <h3 class="greenText">All your images have alt tags</h3>
         </div>
         <div id="imageError">
-            <img src="./assets/arrow.svg" alt="" id="arrow-position4">
+            <div class="back-arrow"></div>
             <h1>Site Scanner</h1>
             <h2>Images</h2>
             <h3 class="redText">Images without alt tags are outlined in red</h3>

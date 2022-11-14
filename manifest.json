@@ -4,7 +4,7 @@
     "version": "0.0.1",
     "manifest_version": 2,
     "browser_action": {
-        "default_popup": "extention.html",
+        "default_popup": "extension.html",
         "default_icon": "logo.svg"
     },
     "icons": {
