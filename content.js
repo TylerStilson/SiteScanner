@@ -1,13 +1,3 @@
-// this file is where you can change certain page elements. So this is where I am grabbing all the links
-
-// const linkMessage = document.getElementById('message');
-
-// console.log("link message: ", linkMessage);
-
-
-
-
-
 var BrokenLinks = [];
 var LinkList = [];
 var ImgList = [];
@@ -16,10 +6,8 @@ var missingAltList = [];
 async function getLinks(){
     const Links = document.getElementsByTagName('a');
     console.log("all link info: ",Links);
-    //var LinkList = [];
 
     for (let Link in Links){
-        //console.log(Link);
         LinkList.push({link: Links[Link].href, html: Links[Link].innerHTML});
         if (Links[Link].href != null){
             var status = await makeRequest(Links[Link].href);
@@ -30,8 +18,6 @@ async function getLinks(){
             console.log("content.js blink list: ", BrokenLinks);
         }
     }
-    //this doesnt show in the extention console. It shows in the browser console.
-    // so next step would be to figure out how to get this "LinkList" variable to the script.js file
     console.log('list in content: ', LinkList);
     return LinkList;
 }
@@ -51,14 +37,10 @@ async function getImage (){
                 missingAltList.push(images[image]);
             }
         }
-        
     }
     console.log("mssing alt list: ", missingAltList);
     return ImgList;
 }
-
-
-
 
 async function makeRequest(url){
     try {
@@ -88,7 +70,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse)=> {
             BrokenLinks[link].style.backgroundColor = "#EB6565";
             BrokenLinks[link].style.borderColor = "#EB6565";
             BrokenLinks[link].style.border = "5px solid";
-            // BrokenLinks[link].style.color = "#EB6565";
         }
         sendResponse("link done");
     }
@@ -106,10 +87,5 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse)=> {
         console.log({links: LinkList, images: ImgList});
         sendResponse({links: LinkList, images: ImgList});
     }
-    // return Promise.resolve({response: "hello there"});
 
 });
-
-// export default getLinks;
-
-//module.exports = getLinks;

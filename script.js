@@ -1,18 +1,3 @@
-// this currently isn't working. it won't pull the variable from content.js
-// var http = require('http');
-//const { LinkList } = require('./content.js');
-// import {links} from './content.js';
-// import LinkList from "./content.js";
-
-// import getLinks from './content.js';
-// const links = getLinks;
-
-//const getLinks = require('./content');
-// import getLinks from './content';
-
-// import { getLinks } from "./content";
-// console.log(getLinks);
-
 //buttons
 const imageButton = document.getElementById('image-button');
 const linkButton = document.getElementById('link-button');
@@ -50,7 +35,6 @@ function goBack(){
     imageError.style.display = "none";
     imageSuccess.style.display = "none";
 }
-
 
 async function linkFunction(){
   homepage.style.display = "none";
@@ -95,9 +79,6 @@ async function linkFunction(){
     });
     
   }
-
-
-
 }
 
 function addElement(link, HtMl){
@@ -121,7 +102,6 @@ function addElement(link, HtMl){
     Blinks.appendChild(newDiv);
 }
 
-
 async function makeRequest(url){
     try {
         var response = await fetch(url);
@@ -132,7 +112,6 @@ async function makeRequest(url){
         console.log(err);
     }
 }
-
 
 function imageFunction(){
     homepage.style.display = "none";
@@ -148,8 +127,6 @@ function imageFunction(){
                 missingAltList.push(ImgList[image]);
             }
         }
-
-        
     }
 
     if (missingAltList.length > 0){
@@ -185,31 +162,3 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 //     console.log("in runtime, links are: ", response);
 //     Links = response;
 // });
-
-//dont know if we need this code any more becuase it gave me the html but in string format... so not the best
-
-
-// chrome.runtime.onMessage.addListener(function(request, sender) {
-//   if (request.action == "getSource") {
-//     //message.innerText = request.source;
-//     pageHTML = request.source;
-//     console.log(pageHTML);
-//   }
-// });
-  
-// function onWindowLoad() {
-
-//   var message = document.querySelector('#message');
-
-//   chrome.tabs.executeScript(null, {
-//     file: "getPagesSource.js"
-//   }, function() {
-//     // If you try and inject into an extensions page or the webstore/NTP you'll get an error
-//     if (chrome.runtime.lastError) {
-//       message.innerText = 'There was an error injecting script : \n' + chrome.runtime.lastError.message;
-//     }
-//   });
-
-// }
-  
-// window.onload = onWindowLoad;
