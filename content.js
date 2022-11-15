@@ -119,6 +119,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse)=> {
             AllLinks[index].style.borderColor = "#EB6565";
             AllLinks[index].style.border = "5px solid";
         }
+        sendResponse("link highlight done");
     }
 
 });

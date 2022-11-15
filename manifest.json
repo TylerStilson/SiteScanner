@@ -5,10 +5,10 @@
     "manifest_version": 2,
     "browser_action": {
         "default_popup": "extension.html",
-        "default_icon": "logo.svg"
+        "default_icon": "logo.jpg"
     },
     "icons": {
-        "128": "logo.svg"
+        "128": "logo.jpg"
     },
     "permissions": ["tabs", "<all_urls>", "nativeMessaging"],
     "content_scripts": [
