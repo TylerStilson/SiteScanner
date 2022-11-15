@@ -16,6 +16,7 @@ var ImgList = [];
 var LinkList = [];
 var BrokenLinks = [];
 var missingAltList = [];
+var listIndex = [];
 
 document.querySelector('#link-button .mainButton').onclick = function () {
     linkFunction();
@@ -48,8 +49,10 @@ async function linkFunction(){
     if (status != '200'){
         //console.log("status is: ", status);
         BrokenLinks.push(LinkList[i]);
+        listIndex.push(i);
     }
   }
+  console.log("list of indexs: ", listIndex);
   //console.log("broken links: ", BrokenLinks);
   //console.log("B list length: ", BrokenLinks.length);
 
@@ -73,7 +76,7 @@ async function linkFunction(){
     // });
 
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, {greeting: "show broken links"}, function(response) {
+        chrome.tabs.sendMessage(tabs[0].id, {greeting: listIndex}, function(response) {
             console.log("response from the highlight call: ",response);
         });
     });
@@ -116,6 +119,7 @@ async function makeRequest(url){
 function imageFunction(){
     homepage.style.display = "none";
     loadingPage.style.display = "flex";
+    loadingMessage.style.display = "block";
     // make the list of images here
     for (let image in ImgList){
         console.log("in content indiv: ", ImgList[image]);
@@ -137,10 +141,12 @@ function imageFunction(){
         });
         loadingMessage.style.display = "none";
         imageError.style.display = 'block';
+        loadingPage.style.alignItems = "flex-start";
     }
     else{
         loadingMessage.style.display = "none";
         imageSuccess.style.display = "block";
+        loadingPage.style.alignItems = "flex-start";
     }
 
 }
@@ -152,12 +158,32 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         // console.log("tabs resp link: ", response.links);
         // console.log("tabs resp images: ", response.images);
         LinkList = response.links;
+        var newBrokenList = response.Broken;
         ImgList = response.images;
-        // console.log("tabs resp linklist var: ", LinkList);
-        // console.log("tabs resp imglist var: ", ImgList);
+        console.log("tabs resp linklist var: ", LinkList);
+        console.log("tabs resp imglist var: ", ImgList);
+        console.log("tabs resp new broken var: ", newBrokenList);
+
 
     });
 });
+
+
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse)=> {
+    if (request.greeting == "grabIndex"){
+        console.log("List of indexs in the add Listener: ",listIndex);
+        sendResponse(listIndex);
+        
+    }  
+    else{
+        sendResponse("noresp for index");
+    }
+
+});
+
+
+
 // chrome.runtime.sendMessage('get-links', (response) => {
 //     console.log("in runtime, links are: ", response);
 //     Links = response;
