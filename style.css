@@ -139,3 +139,19 @@ h2 {
 #imageError {
     display: none;
 }
+
+#loadingIcon {
+    width: 80px;
+    animation: spin 2s infinite linear;
+    transform: scale(300%);
+    filter: invert(75%) sepia(39%) saturate(548%) hue-rotate(86deg) brightness(99%) contrast(91%);
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-360deg);
+    }
+}

@@ -4,7 +4,7 @@ const linkButton = document.getElementById('link-button');
 //pages
 const homepage = document.getElementById('homescreen');
 const loadingPage = document.getElementById('loading');
-const loadingMessage = document.getElementById('loadingMessage');
+const loadingMessage = document.getElementById('loadingIcon');
 const linkSuccess = document.getElementById('linkSuccess');
 const linkError = document.getElementById('linkError');
 const Blinks = document.getElementById('insertBlinks');
