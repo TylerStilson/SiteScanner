@@ -32,7 +32,6 @@
                 <p>Make sure you have all your image alt attributes for accessibility</p>
             </div>
         </div>
-
     </div>
 
 
@@ -42,12 +41,15 @@
             <div class="back-arrow"></div>
             <h1>Site Scanner</h1>
             <h2 class="lightGrey">Links</h2>
-            <h3 class="greenText" style="padding-top: 20px">All your links are working</h3>
+            <h3 class="greenText">
+                All your links are working
+            </h3>
         </div>
         <div id="linkError">
             <div class="back-arrow"></div>
             <h1>Site Scanner</h1>
-            <h2>List of Broken Links:</h2>
+            <h2 class="redText">Broken links:</h2>
+            <h3 class="redText">(outlined in red on the page)</h3>
             <div id="insertBlinks"></div>
         </div>
 
@@ -55,13 +57,18 @@
             <div class="back-arrow"></div>
             <h1>Site Scanner</h1>
             <h2 class="lightGrey">Images</h2>
-            <h3 class="greenText" style="padding-top: 20px">All your images have alt tags</h3>
+            <h3 class="greenText">
+                All your images have alt tags
+            </h3>
         </div>
         <div id="imageError">
             <div class="back-arrow"></div>
             <h1>Site Scanner</h1>
-            <h2>Images</h2>
-            <h3 class="redText" style="padding-top: 20px">Images without alt tags are outlined in red</h3>
+            <h2 class="redText">
+                Images without alt attributes:
+            </h2>
+            <h3 class="redText">(outlined in red on the page)</h3>
+            <div id="insertBimgs"></div>
         </div>
     </div>
 

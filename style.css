@@ -14,6 +14,20 @@
     margin: 0;
     padding: 0;
 }
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
 body {
     width: 430px;
     height: 330px;
@@ -34,9 +48,14 @@ h1 {
 h2 {
     font-weight: 700;
     font-size: 28px;
-    line-height: 38px;
+    line-height: 28px;
     text-align: center;
     color: var(--gray);
+}
+h3 {
+    padding-top: 10px;
+    text-align: center;
+    font-size: 14px;
 }
 .mainButton {
     background-color: var(--green);
@@ -104,14 +123,12 @@ h2 {
     left: 20px;
     cursor: pointer;
 }
-
 #loading {
     display: none;
     height: 100%;
     align-items: center;
     justify-content: center;
 }
-
 #linkSuccess {
     display: none;
 }
@@ -120,17 +137,14 @@ h2 {
 }
 .lightGrey {
     font-weight: 700;
-    font-size: 32px;
     color: var(--gray);
 }
 .greenText {
     font-weight: 500;
-    font-size: 26px;
     color: var(--green);
 }
 .redText {
     font-weight: 500;
-    font-size: 26px;
     color: var(--red);
 }
 #imageSuccess {
@@ -139,15 +153,21 @@ h2 {
 #imageError {
     display: none;
 }
-
+.bad-item {
+    margin: 6px;
+    color: var(--red);
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}
 #loadingIcon {
     width: 80px;
     animation: spin 2s infinite linear;
     transform: scale(300%);
     filter: invert(75%) sepia(39%) saturate(548%) hue-rotate(86deg) brightness(99%) contrast(91%);
 }
-#insertBlinks{
+#insertBlinks, #insertBimgs {
     padding-top: 20px;
+    margin-bottom: 12px;
 }
 
 @keyframes spin {

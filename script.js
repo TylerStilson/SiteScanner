@@ -8,6 +8,7 @@ const loadingMessage = document.getElementById('loadingIcon');
 const linkSuccess = document.getElementById('linkSuccess');
 const linkError = document.getElementById('linkError');
 const Blinks = document.getElementById('insertBlinks');
+const Bimgs = document.getElementById('insertBimgs');
 const imageSuccess = document.getElementById('imageSuccess');
 const imageError = document.getElementById('imageError');
 
@@ -40,76 +41,63 @@ function goBack(){
 async function linkFunction(){
   homepage.style.display = "none";
   loadingPage.style.display = "flex";
-  console.log("here in link function");
   for (let i in LinkList){
-    console.log("individul: ", LinkList[i].link);
-    if ( LinkList[i].link != null){
+    if ( LinkList[i].link != null && !LinkList[i].link.startsWith("mailto:") && !LinkList[i].link.startsWith("tel:")){
         var status = await makeRequest(LinkList[i].link);
     }
     if (status != '200'){
-        //console.log("status is: ", status);
         BrokenLinks.push(LinkList[i]);
         listIndex.push(i);
     }
   }
-  console.log("list of indexs: ", listIndex);
-  //console.log("broken links: ", BrokenLinks);
-  //console.log("B list length: ", BrokenLinks.length);
 
   if (BrokenLinks.length == 0){
-    console.log("link scanner success. found no broken links");
+    console.log("Link scanner success - found no broken links");
     loadingMessage.style.display = "none";
     linkSuccess.style.display = "block";
     loadingPage.style.alignItems = "flex-start";
   } else {
-    console.log("there was broken links");
+    console.log("There are broken links");
     for (let i in BrokenLinks){
-        addElement(BrokenLinks[i].link, BrokenLinks[i].html);
+        if (BrokenLinks[i].link && BrokenLinks[i].link != null) {
+            addLinkElement(BrokenLinks[i].link, BrokenLinks[i].html);
+        }
     }
 
     loadingMessage.style.display = "none";
     linkError.style.display = "block";
     loadingPage.style.alignItems = "flex-start";
 
-    // chrome.tabs.sendMessage(tabs[0].id, {greeting: "show broken links"}).then((response)=>{
-    //     console.log(response);
-    // });
-
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         chrome.tabs.sendMessage(tabs[0].id, {greeting: listIndex}, function(response) {
-            console.log("response from the highlight call: ",response);
+            console.log("response from the highlight call: ", response);
         });
     });
     
   }
 }
 
-function addElement(link, HtMl){
-    console.log("url: ", link);
-    console.log("text: ", HtMl);
-    const newDiv = document.createElement("div");
+function addImageElement(src){
     const newContent = document.createElement("p");
-    newContent.innerHTML = "link: ";
-    newContent.style.color = "#EB6565";
-    const urlContent = document.createElement("p");
-    urlContent.innerHTML = link;
-    urlContent.style.paddingLeft = "8px";
-    urlContent.style.color = "#EB6565";
+    newContent.innerHTML = `<strong>Src:</strong> ${src}`;
+    newContent.classList.add("bad-item");
+    Bimgs.appendChild(newContent);
+}
 
-    newDiv.appendChild(newContent);
-    newDiv.appendChild(urlContent);
-
-    newDiv.style.display = "flex";
-    newDiv.style.marginBottom = "10px";
-
-    Blinks.appendChild(newDiv);
+function addLinkElement(link, html){
+    html = html.toString();
+    if (html.includes("<img")) {
+        html = "Content contains an image";
+    }
+    const newContent = document.createElement("p");
+    newContent.innerHTML = `<strong>Link:</strong> ${link} <br><strong>Content:</strong> ${html}`;
+    newContent.classList.add("bad-item");
+    Blinks.appendChild(newContent);
 }
 
 async function makeRequest(url){
     try {
         var response = await fetch(url);
-        // console.log('response.status: ', response.status);
-        // console.log(response);
         return response.status;
     } catch (err) {
         console.log(err);
@@ -120,16 +108,15 @@ function imageFunction(){
     homepage.style.display = "none";
     loadingPage.style.display = "flex";
     loadingMessage.style.display = "block";
-    // make the list of images here
     for (let image in ImgList){
         console.log("in content indiv: ", ImgList[image]);
-        if ( ImgList[image] == {} | ImgList[image].src == ''){
-            console.log("dont count these");
+        if ((ImgList[image] != {} | ImgList[image].src != '') && (ImgList[image].alt == "" || !ImgList[image].alt)){
+            missingAltList.push(ImgList[image]);
         }
-        else{
-            if (ImgList[image].alt == ""){
-                missingAltList.push(ImgList[image]);
-            }
+    }
+    for (let i in missingAltList){
+        if (missingAltList[i].src && missingAltList[i].src != null) {
+            addImageElement(missingAltList[i].src);
         }
     }
 
@@ -143,48 +130,27 @@ function imageFunction(){
         imageError.style.display = 'block';
         loadingPage.style.alignItems = "flex-start";
     }
-    else{
+    else {
         loadingMessage.style.display = "none";
         imageSuccess.style.display = "block";
         loadingPage.style.alignItems = "flex-start";
     }
-
 }
 
 var Links = [];
 chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello"}, function(response) {
-        console.log("tabs res: ", response);
-        // console.log("tabs resp link: ", response.links);
-        // console.log("tabs resp images: ", response.images);
         LinkList = response.links;
-        var newBrokenList = response.Broken;
         ImgList = response.images;
-        console.log("tabs resp linklist var: ", LinkList);
-        console.log("tabs resp imglist var: ", ImgList);
-        console.log("tabs resp new broken var: ", newBrokenList);
-
-
     });
 });
 
-
-
 chrome.runtime.onMessage.addListener((request, sender, sendResponse)=> {
     if (request.greeting == "grabIndex"){
-        console.log("List of indexs in the add Listener: ",listIndex);
+        console.log("List of indexes in the add Listener: ",listIndex);
         sendResponse(listIndex);
-        
     }  
     else{
         sendResponse("noresp for index");
     }
-
 });
-
-
-
-// chrome.runtime.sendMessage('get-links', (response) => {
-//     console.log("in runtime, links are: ", response);
-//     Links = response;
-// });
