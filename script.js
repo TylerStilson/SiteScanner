@@ -108,11 +108,16 @@ function imageFunction(){
     homepage.style.display = "none";
     loadingPage.style.display = "flex";
     loadingMessage.style.display = "block";
+    console.log("In Image Function, ImgList: ", ImgList);
     for (let image in ImgList){
         console.log("in content indiv: ", ImgList[image]);
-        if ((ImgList[image] != {} | ImgList[image].src != '') && (ImgList[image].alt == "" || !ImgList[image].alt)){
+        // if ((ImgList[image] != {} | ImgList[image].src != '') && (ImgList[image].alt == "" || !ImgList[image].alt)){
+        //     missingAltList.push(ImgList[image]);
+        // }
+        if((ImgList[image].src) && (ImgList[image].src.length > 0) && (!ImgList[image].alt)){
             missingAltList.push(ImgList[image]);
         }
+        console.log("missingAltList: ", missingAltList);
     }
     for (let i in missingAltList){
         if (missingAltList[i].src && missingAltList[i].src != null) {
