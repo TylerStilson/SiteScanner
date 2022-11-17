@@ -11,6 +11,7 @@
         "128": "logo.png"
     },
     "permissions": ["tabs", "<all_urls>", "nativeMessaging"],
+    "description": "Scan your site for broken links and missing image alt attributes.",
     "content_scripts": [
         {
             "matches": [
